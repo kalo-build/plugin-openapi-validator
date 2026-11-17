@@ -56,8 +56,9 @@ func ValidateBytes(specBytes []byte, fileName string) *Report {
 		})
 	}
 
-	if model != nil && model.Model.Info != nil {
-		report.Version = model.Model.Info.Version
+	// openapiVersion is the document's `openapi` field (e.g. 3.1.0), not info.version.
+	if model != nil {
+		report.Version = model.Model.Version
 	}
 
 	docValidator, validatorErrs := validator.NewValidator(document)

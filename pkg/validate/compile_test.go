@@ -42,6 +42,8 @@ func (suite *CompileTestSuite) TestValidateSpec_Valid() {
 	suite.NoError(err)
 	suite.True(report.Valid)
 	suite.Empty(report.Errors)
+	// valid.yaml has openapi: "3.1.0" and info.version: 1.0.0; the report names the former.
+	suite.Equal("3.1.0", report.Version)
 
 	reportPath := filepath.Join(outputDir, "valid-report.json")
 	gtReportPath := filepath.Join(suite.GroundTruthPath, "valid-report.json")
